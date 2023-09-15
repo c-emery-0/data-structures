@@ -59,9 +59,39 @@ public class ListDemo
          * after the iterator.
          * The hasNext is often used in a while loop condition
          */
+        iterator = staff.listIterator();
         while(iterator.hasNext()) {
+            String n = iterator.next();
+            if (n.equals("Natasha")) { //TN|BSG
+                iterator.remove(); //T|BSG
+            }
+        } //TBSG|
 
+        /* Enhanced for loops work with linked lists :3 */
 
+        for(String n : staff) {
+            System.out.print(n + " ");
+        }
+        System.out.println();
+        System.out.println("Expected: T B S G");
+
+        /* usually gives you a "ConcurrentModificationException" 
+         * can't modify a linked list while also using an iterator
+         * Unless. you use the iterator to do so */
+        iterator = staff.listIterator();
+        while(iterator.hasNext()) {
+            String n = iterator.next();
+            if (n.equals("Scott")) { //TNBS|G
+                //staff.remove("Scott"); //TNBSG|
+            }
+        } 
+
+        /* Enhanced for loops create iterators in the compiler */
+
+        for(String n : staff) {
+            if (n.equals("Scott")) { //TNBS|G
+                staff.add("Rocket"); //TNBSG|
+            }
         }
 
         //through the looking class line 225..!!
