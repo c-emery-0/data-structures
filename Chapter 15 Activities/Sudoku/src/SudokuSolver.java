@@ -33,13 +33,12 @@ public class SudokuSolver {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Cannot open: " + fileName);
-        }
-
+        } 
         // create the list of sets for each row (this.rows)
-        // ...
+        this.rows = new ArrayList<Set<Integer>>(); //  eurm
 
         // create the list of sets for each col (this.cols)
-        // ...
+        for ()
 
         // create the list of sets for each square (this.squares)
         /* the squares are added to the list row-by-row:
