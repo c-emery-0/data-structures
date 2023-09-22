@@ -35,10 +35,28 @@ public class SudokuSolver {
             System.out.println("Cannot open: " + fileName);
         } 
         // create the list of sets for each row (this.rows)
-        this.rows = new ArrayList<Set<Integer>>(); //  eurm
+        this.rows = new ArrayList<Set<Integer>>();//eurm
+        Set<Integer> tempsetvar;
+        
+        for (int[] gridrow : this.grid) {
+            tempsetvar = new HashSet<Integer>();
+            for (int i : gridrow) {
+                tempsetvar.add(i);
+            }
+            this.rows.add(tempsetvar);
+        }
 
         // create the list of sets for each col (this.cols)
-        for ()
+        this.cols = new ArrayList<Set<Integer>>();//eurm
+        
+        for (int i = 0, i < N, i++) {
+            tempsetvar = new HashSet<Integer>();
+            for (int j = 0, j < N, j++) {
+                tempsetvar.add(this.grid[i][j]);
+            }
+            this.cols.add(tempsetvar);
+
+        }
 
         // create the list of sets for each square (this.squares)
         /* the squares are added to the list row-by-row:
@@ -140,7 +158,7 @@ public class SudokuSolver {
     }
 
     public static void main(String[] args) {
-        String fileName = "src/puzzle1.txt";
+        String fileName = "Chapter 15 Activities\\Sudoku\\src\\puzzle1.txt";
 
         SudokuSolver solver = new SudokuSolver(fileName);
         System.out.println(solver);
