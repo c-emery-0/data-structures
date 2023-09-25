@@ -49,13 +49,12 @@ public class SudokuSolver {
         // create the list of sets for each col (this.cols)
         this.cols = new ArrayList<Set<Integer>>();//eurm
         
-        for (int i = 0, i < N, i++) {
+        for (int i = 0; i < N; i++) {
             tempsetvar = new HashSet<Integer>();
-            for (int j = 0, j < N, j++) {
-                tempsetvar.add(this.grid[i][j]);
+            for (int j = 0; j < N; j++) {
+                tempsetvar.add(this.grid[j][i]);
             }
             this.cols.add(tempsetvar);
-
         }
 
         // create the list of sets for each square (this.squares)
@@ -64,10 +63,25 @@ public class SudokuSolver {
             3 4 5
             6 7 8
          */
-        // ...
+        this.squares = new ArrayList<Set<Integer>>();
 
+        for (int sq = 0; sq < N; sq++){
+            tempsetvar = new HashSet<Integer>();
+
+            for (int x = 0; x < M; x ++){
+                for (int y = 0; y < M; y ++) {
+                    tempsetvar.add(this.grid[sq / M * M + y][(sq % M)*M + x]);
+                }
+            }
+            this.squares.add(tempsetvar);
+        }
+
+        /* */
         // create a hash set for [1..9] (this.nums)
-        // ...
+        this.nums = new HashSet<Integer>();
+        for (int i = 0; i < N; i++) {
+            this.nums.add(1+i);
+        }
 
         // visually inspect that all the sets are correct
         for (int row = 0; row < N; row++) {
@@ -82,6 +96,7 @@ public class SudokuSolver {
         System.out.println(this.nums);
     }
 
+    
     public boolean solve() {
         // find an empty location, if any
         boolean finished = true;
@@ -113,8 +128,9 @@ public class SudokuSolver {
          */
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
-        
-        // ...
+        //...
+        this.rows.get(nextRow);
+        //...
 
         // if there are no possible numbers, we cannot solve the board in its current state
         if (possibleNums.isEmpty()) {
@@ -129,7 +145,7 @@ public class SudokuSolver {
             // recursively solve the board
             if (this.solve()) {
                 // the board is solved!
-                return true;
+               return true;
             } else {
                 /*
                  Undo the move before trying another possible number by setting the corresponding
@@ -142,7 +158,7 @@ public class SudokuSolver {
 
         return false;
     }
-
+    
     public String toString() {
         String str = "";
 
