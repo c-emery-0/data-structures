@@ -18,7 +18,7 @@ public class FirstLetterMap
         {
 
             // Create your map here
-            ...
+            Map<String, ArrayList<String>> words = new HashMap<>();
 
             while (in.hasNext())
             {
@@ -27,8 +27,16 @@ public class FirstLetterMap
 
                 // Update the map here
                 // Modify Worked Example 15.1
-                . . .
+                ArrayList<String> allCharStrings = new ArrayList<String>();
+                allCharStrings.add(word);
 
+                if (words.get(c) == null) {
+                } else {
+                    allCharStrings.addAll(words.get(c));
+                    System.out.print(allCharStrings);
+                    allCharStrings.sort();
+                }
+                words.put(c, allCharStrings);
 
             }
 

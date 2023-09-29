@@ -18,7 +18,7 @@ public class FirstLetterMap
         {
 
             // Create your map here
-            ...
+            Map<Integer, String> words = new HashMap<>();
 
             while (in.hasNext())
             {
