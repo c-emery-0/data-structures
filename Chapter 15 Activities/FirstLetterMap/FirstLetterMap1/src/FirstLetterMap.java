@@ -27,7 +27,9 @@ public class FirstLetterMap
 
                 // Update the map here
                 // Use the Java 8 merge method
-                . . .
+                words.merge(c, new TreeSet<>(Arrays.asList(wprd)), 
+                (oldValue, newValue) -> {oldvalue.add(word); return oldvalue;}
+                );
 
             }
 

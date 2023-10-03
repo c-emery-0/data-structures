@@ -28,7 +28,8 @@ public class StringLengthMap2
                 // Update the map here
                 // Modify Worked Example 15.1
                 
-                words.merge(len, word, (oldStr, notPresentValue) -> oldStr + ", " + notPresentValue);
+                words.merge(len, word, (oldStr, notPresentValue) -> 
+                oldStr + ", " + notPresentValue);
 
 
             }
