@@ -3,22 +3,20 @@ import java.util.Stack;
 public class Grid
 {
     private static final int SIZE = 10;
-    int[][] pixels = new int[SIZE][SIZE];
-    Stack<Pair> toColor;
-    int fillCount;
+    private int[][] pixels = new int[SIZE][SIZE];
+    private Stack<Pair> toColor = new Stack<>();
+    private int fillCount = 1;
 
-    public Grid(){
-        toColor = new Stack<>();
-        fillCount = 0;
+    public Grid() {
     }
+
     /**
      * Flood fill, starting with the given row and column.
     */
     public void floodfill(int y, int x)
     {
-        if (y < 0 || y > 9 || x < 0 || y > 9)
+        if (y < 0 || y > 9 || x < 0 || x > 9)
             return;
-
         toColor.push(new Pair(y, x));
 
         Pair px = toColor.pop();
