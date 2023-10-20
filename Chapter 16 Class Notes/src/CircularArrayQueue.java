@@ -6,32 +6,39 @@ import java.util.NoSuchElementException;
 public class CircularArrayQueue
 {
     private Object[] elements;
+    private int head, tail, currentSize;
     //private data
-
-
 
     /**
         Constructs an empty queue.
     */
-
-
-
-
+    public CircularArrayQueue() {
+        final int INITIAL_SIZE = 5;
+        this.elements = new Object[INITIAL_SIZE];
+        
+        head= 0; tail = 0; currentSize = 0;
+    }
 
 
     /**
         Checks whether this queue is empty.
         @return true if this queue is empty
     */
-
-
-
+    public boolean empty() {
+        this.currentSize.data == 0;
+    }
 
     /**
         Adds an element to the tail of this queue.
         @param newElement the element to add
     */
-
+    public void add(Object obj) {
+        this.currentSize ++;
+        this.elements[this.tail].equal(obj);
+        this.tail ++;
+       this.tail %= this.elements.length;
+        
+    }
 
 
 
@@ -40,7 +47,13 @@ public class CircularArrayQueue
         Removes an element from the head of this queue.
         @return the removed element
     */
-
+    public Object remove() {
+        if (this.empty()) throw new NoSuchElementException();
+        this.currentSize --;
+        Object element = this.elements[this.head];
+        this.head = (this.head + 1) % this.elements.length;
+        return element;
+    }
 
 
 
