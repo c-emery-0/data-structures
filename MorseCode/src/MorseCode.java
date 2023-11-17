@@ -71,9 +71,8 @@ public class MorseCode
      */
     private static void addSymbol(char letter, String code)
     {
-        /*
-            !!! INSERT CODE HERE
-        */
+        codeMap.put(letter, code);
+        treeInsert(letter, code);
     }
 
     /**
@@ -85,9 +84,24 @@ public class MorseCode
      */
     private static void treeInsert(char letter, String code)
     {
-        /*
-            !!! INSERT CODE HERE
-        */
+        TreeNode current = decodeTree; //root
+        for (int i = 0; i < code.length(); i++) {
+            char signal = code.charAt(i);
+
+            if (signal == '.') { //look for the left of the root
+                if (current.getLeft() == null) {
+                    current.setLeft(new TreeNode(' ', null, null));
+                }
+                current = current.getLeft();
+            } else { //signal == ' ', look for the right of the root
+                if (current.getRight() == null) {
+                    current.setRight(new TreeNode(' ', null, null));
+                }
+                current = current.getRight();
+
+            }
+        }
+        current.setValue(letter);
     }
 
     /**
@@ -99,11 +113,16 @@ public class MorseCode
     public static String encode(String text)
     {
         StringBuffer morse = new StringBuffer(400);
-
-        /*
-            !!! INSERT CODE HERE
-        */
-
+        start();
+        for(int i = 0; i < text.length(); i++) {
+            char letter = text.charAt(i);
+            System.out.print(letter);
+            if (letter != ' ') {
+                morse.append(codeMap.get(letter));
+            }
+            morse.append(' ');
+        }
+        System.out.println(morse.toString());
         return morse.toString();
     }
 
@@ -117,10 +136,28 @@ public class MorseCode
     {
         StringBuffer text = new StringBuffer(100);
 
-        /*
-            !!! INSERT CODE HERE
-        */
+        TreeNode current = decodeTree;
+        for (int i = 0; i < morse.length(); i++) {// loop through to keep finding nodes
+            char signal = morse.charAt(i);
+            
+            //traverse through one node
+            if (signal == '.') {
+                current = current.getLeft();            
+            } else if (signal == '_') {
+                current = current.getRight();
+            }
 
+            if (signal == ' ' && i != morse.length() - 1 && (morse.charAt(i+1) == ' ' || morse.charAt(i-1) == ' ')) {
+                //found a space! put a space in the plaintext
+                text.append(" ");
+            } else if (signal == ' ') { 
+                // it's not a space! it's a break between letters
+                text.append(current.getValue());
+                current = decodeTree;
+            }
+
+
+        }
         return text.toString();
     }
 }
