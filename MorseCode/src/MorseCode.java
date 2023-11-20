@@ -113,16 +113,14 @@ public class MorseCode
     public static String encode(String text)
     {
         StringBuffer morse = new StringBuffer(400);
-        start();
+        text = text.toUpperCase();
         for(int i = 0; i < text.length(); i++) {
             char letter = text.charAt(i);
-            System.out.print(letter);
             if (letter != ' ') {
                 morse.append(codeMap.get(letter));
             }
             morse.append(' ');
         }
-        System.out.println(morse.toString());
         return morse.toString();
     }
 
@@ -135,22 +133,22 @@ public class MorseCode
     public static String decode(String morse)
     {
         StringBuffer text = new StringBuffer(100);
-
         TreeNode current = decodeTree;
         for (int i = 0; i < morse.length(); i++) {// loop through to keep finding nodes
             char signal = morse.charAt(i);
-            
             //traverse through one node
             if (signal == '.') {
-                current = current.getLeft();            
-            } else if (signal == '_') {
+                current = current.getLeft(); 
+            } 
+            if (signal == '-') {
                 current = current.getRight();
             }
 
-            if (signal == ' ' && i != morse.length() - 1 && (morse.charAt(i+1) == ' ' || morse.charAt(i-1) == ' ')) {
+            if (signal == ' ' && i != morse.length() - 1 && morse.charAt(i+1) == ' ' && morse.charAt(i-1) == ' ') {
                 //found a space! put a space in the plaintext
                 text.append(" ");
-            } else if (signal == ' ') { 
+            } 
+            if (signal == ' ') { 
                 // it's not a space! it's a break between letters
                 text.append(current.getValue());
                 current = decodeTree;
